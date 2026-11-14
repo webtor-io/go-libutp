@@ -1,6 +1,6 @@
 module github.com/anacrolix/go-libutp
 
-go 1.24.0
+go 1.25.0
 
 require (
 	github.com/anacrolix/envpprof v1.1.0
@@ -12,7 +12,7 @@ require (
 	github.com/anacrolix/tagflag v1.1.0
 	github.com/bradfitz/iter v0.0.0-20191230175014-e8f45d346db8
 	github.com/go-quicktest/qt v1.102.0
-	golang.org/x/net v0.47.0
+	golang.org/x/net v0.55.0
 )
 
 require (
