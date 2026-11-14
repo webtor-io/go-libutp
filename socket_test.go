@@ -23,3 +23,14 @@ func TestSocketNetwork(t *testing.T) {
 	defer s.Close()
 	assert.Equal(t, "udp", s.Addr().Network())
 }
+
+func TestCloseForgetsSocket(t *testing.T) {
+	s, err := NewSocket("udp", "127.0.0.1:0")
+	require.NoError(t, err)
+	require.NoError(t, s.Close())
+	mu.Lock()
+	defer mu.Unlock()
+	for _, v := range libContextToSocket {
+		assert.NotSame(t, s, v)
+	}
+}
