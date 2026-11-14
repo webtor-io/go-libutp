@@ -363,7 +363,10 @@ func (s *Socket) closeLocked() error {
 	}
 	// Calling this deletes the pointer. It must not be referred to after
 	// this.
-	C.utp_destroy(s.ctx.asCPtr())
+	ctx := s.ctx
+	C.utp_destroy(ctx.asCPtr())
+	// After destroy: it runs callbacks that look the socket up by context.
+	delete(libContextToSocket, ctx)
 	s.ctx = nil
 	s.pc.Close()
 	close(s.backlog)
